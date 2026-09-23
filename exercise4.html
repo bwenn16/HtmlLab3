@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Exercise 4</title>
+</head>
+
+<body>
+
+    <h1>Number Guessing Game</h1>
+
+    <p id="message"></p>
+
+    <script src="randominteger.js"></script>
+
+    <script>
+
+        let secretNumber = randomInt();
+        let guesses = [];
+        let turns = 10;
+
+        function playGame() {
+
+            while (turns > 0) {
+
+                let guess = parseInt(prompt(
+                    "Guess a number between 1 and 100.\n" +
+                    "You have " + turns + " turns left."
+                ));
+
+                guesses.push(guess);
+
+                if (guess === secretNumber) {
+
+                    document.getElementById("message").innerHTML =
+                        "Correct! The number was " + secretNumber +
+                        ".<br>You guessed: " + guesses.join(", ");
+
+                    break;
+
+                } else if (guess < secretNumber) {
+
+                    alert("Wrong! Your guess is too low.");
+
+                } else {
+
+                    alert("Wrong! Your guess is too high.");
+
+                }
+
+                turns--;
+
+                if (turns > 0) {
+                    alert("Previous guesses: " + guesses.join(", "));
+                }
+            }
+
+            if (turns === 0 && guesses[guesses.length - 1] !== secretNumber) {
+
+                document.getElementById("message").innerHTML =
+                    "Game over! The number was " + secretNumber +
+                    ".<br>Your guesses were: " + guesses.join(", ");
+            }
+
+            let again = confirm("Do you want to play again?");
+
+            if (again) {
+                location.reload();
+            }
+
+        }
+
+        playGame();
+
+    </script>
+
+</body>
+
+</html>
